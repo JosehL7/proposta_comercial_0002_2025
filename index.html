@@ -246,13 +246,21 @@
             color: #22d3ee;
         }
 
+        /* Container para tabelas responsivas */
+        .table-responsive {
+            overflow-x: auto; /* Permite rolagem horizontal */
+            -webkit-overflow-scrolling: touch; /* Rolagem suave em iOS */
+            width: 100%; /* Garante que o container ocupe a largura total */
+            margin: 25px 0; /* Ajusta a margem para o container */
+        }
+
         .specs-table {
-            width: 100%;
+            width: 100%; /* A tabela deve ocupar 100% do seu container */
+            min-width: 600px; /* Define uma largura mínima para a tabela em telas pequenas */
             border-collapse: collapse;
-            margin: 25px 0;
             background: #262626;
             border-radius: 8px;
-            overflow: hidden;
+            overflow: hidden; /* Garante que o border-radius seja aplicado */
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
@@ -432,6 +440,12 @@
             border-radius: 8px;
             cursor: pointer;
             font-size: 18px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+
+        .menu-toggle:active {
+            transform: scale(0.95);
         }
 
         /* Responsivo */
@@ -465,6 +479,10 @@
                 font-size: 36px;
             }
 
+            .hero-subtitle {
+                font-size: 20px;
+            }
+
             .commercial-section {
                 padding: 30px 20px;
             }
@@ -477,6 +495,43 @@
             .timeline-number {
                 margin-right: 0;
                 margin-bottom: 15px;
+            }
+
+            .specs-table th,
+            .specs-table td {
+                padding: 12px; /* Reduz o padding das células da tabela */
+                font-size: 13px; /* Reduz o tamanho da fonte da tabela */
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr; /* Empilha os itens de contato em uma única coluna */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 28px;
+            }
+
+            .hero-subtitle {
+                font-size: 18px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .subsection-title {
+                font-size: 20px;
+            }
+
+            .price-highlight {
+                font-size: 28px;
+                padding: 30px;
+            }
+
+            .specs-table {
+                min-width: 500px; /* Garante que a tabela ainda tenha uma largura mínima para rolagem */
             }
         }
 
@@ -591,37 +646,39 @@
                     <strong>Análise preliminar da placa existente:</strong> Durante visita técnica ao cliente, foi realizada análise detalhada da placa física em mãos, permitindo identificação precisa dos principais componentes que compõem o sistema atual.
                 </div>
 
-                <table class="specs-table">
-                    <thead>
-                        <tr>
-                            <th>Componente</th>
-                            <th>Tipo</th>
-                            <th>Função</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>LED com suporte</td>
-                            <td>Indicador visual</td>
-                            <td>Sinalização de acionamento do sensor</td>
-                        </tr>
-                        <tr>
-                            <td>Bateria de lítio</td>
-                            <td>Fonte de alimentação</td>
-                            <td>Alimentação autônoma do circuito</td>
-                        </tr>
-                        <tr>
-                            <td>Microcontrolador</td>
-                            <td>Unidade de processamento</td>
-                            <td>Controle da lógica de funcionamento</td>
-                        </tr>
-                        <tr>
-                            <td>Botão</td>
-                            <td>Entrada digital</td>
-                            <td>Acionamento via pressão da membrana</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="specs-table">
+                        <thead>
+                            <tr>
+                                <th>Componente</th>
+                                <th>Tipo</th>
+                                <th>Função</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>LED com suporte</td>
+                                <td>Indicador visual</td>
+                                <td>Sinalização de acionamento do sensor</td>
+                            </tr>
+                            <tr>
+                                <td>Bateria de lítio</td>
+                                <td>Fonte de alimentação</td>
+                                <td>Alimentação autônoma do circuito</td>
+                            </tr>
+                            <tr>
+                                <td>Microcontrolador</td>
+                                <td>Unidade de processamento</td>
+                                <td>Controle da lógica de funcionamento</td>
+                            </tr>
+                            <tr>
+                                <td>Botão</td>
+                                <td>Entrada digital</td>
+                                <td>Acionamento via pressão da membrana</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
                 <h3 class="subsection-title">1.3. Funcionamento do Sistema</h3>
                 <div class="text-content">
@@ -672,42 +729,44 @@
                     Com base na análise da placa original, a nova versão será desenvolvida mantendo as mesmas especificações funcionais, porém com possíveis melhorias na implementação, utilizando componentes atuais e técnicas modernas de desenvolvimento eletrônico.
                 </div>
 
-                <table class="specs-table">
-                    <thead>
-                        <tr>
-                            <th>Especificação</th>
-                            <th>Valor/Descrição</th>
-                            <th>Observações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Tensão de Alimentação</td>
-                            <td>3.0V - 3.7V (Bateria Li-ion)</td>
-                            <td>Compatível com bateria original</td>
-                        </tr>
-                        <tr>
-                            <td>Corrente de Operação</td>
-                            <td>< 50mA (LED aceso)</td>
-                            <td>Baixo consumo para autonomia</td>
-                        </tr>
-                        <tr>
-                            <td>Corrente em Standby</td>
-                            <td>< 10µA</td>
-                            <td>Modo de baixo consumo</td>
-                        </tr>
-                        <tr>
-                            <td>Temperatura de Operação</td>
-                            <td>-10°C a +60°C</td>
-                            <td>Ambiente industrial típico</td>
-                        </tr>
-                        <tr>
-                            <td>Dimensões da Placa</td>
-                            <td>Equivalente à original</td>
-                            <td>Compatibilidade mecânica</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="specs-table">
+                        <thead>
+                            <tr>
+                                <th>Especificação</th>
+                                <th>Valor/Descrição</th>
+                                <th>Observações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Tensão de Alimentação</td>
+                                <td>3.0V - 3.7V (Bateria Li-ion)</td>
+                                <td>Compatível com bateria original</td>
+                            </tr>
+                            <tr>
+                                <td>Corrente de Operação</td>
+                                <td>< 50mA (LED aceso)</td>
+                                <td>Baixo consumo para autonomia</td>
+                            </tr>
+                            <tr>
+                                <td>Corrente em Standby</td>
+                                <td>< 10µA</td>
+                                <td>Modo de baixo consumo</td>
+                            </tr>
+                            <tr>
+                                <td>Temperatura de Operação</td>
+                                <td>-10°C a +60°C</td>
+                                <td>Ambiente industrial típico</td>
+                            </tr>
+                            <tr>
+                                <td>Dimensões da Placa</td>
+                                <td>Equivalente à original</td>
+                                <td>Compatibilidade mecânica</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
                 <h3 class="subsection-title">2.2. Arquitetura do Sistema</h3>
                 <div class="text-content">
@@ -766,47 +825,49 @@
                 <h2 class="section-title">4. Entregáveis do Projeto</h2>
                 
                 <h3 class="subsection-title">4.1. Documentação Técnica</h3>
-                <table class="specs-table">
-                    <thead>
-                        <tr>
-                            <th>Documento</th>
-                            <th>Descrição</th>
-                            <th>Formato</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Relatório de Engenharia Reversa</td>
-                            <td>Análise completa da placa original</td>
-                            <td>PDF</td>
-                        </tr>
-                        <tr>
-                            <td>Esquemático Elétrico</td>
-                            <td>Diagrama do circuito da nova versão</td>
-                            <td>PDF + Arquivos CAD</td>
-                        </tr>
-                        <tr>
-                            <td>Layout da PCB</td>
-                            <td>Projeto da placa de circuito impresso</td>
-                            <td>Gerber + Arquivos CAD</td>
-                        </tr>
-                        <tr>
-                            <td>Lista de Componentes (BOM)</td>
-                            <td>Especificação completa dos componentes</td>
-                            <td>Excel/CSV</td>
-                        </tr>
-                        <tr>
-                            <td>Código Fonte do Firmware</td>
-                            <td>Programa do microcontrolador</td>
-                            <td>Arquivos de código + HEX</td>
-                        </tr>
-                        <tr>
-                            <td>Relatório de Testes</td>
-                            <td>Resultados dos testes de validação</td>
-                            <td>PDF</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="specs-table">
+                        <thead>
+                            <tr>
+                                <th>Documento</th>
+                                <th>Descrição</th>
+                                <th>Formato</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Relatório de Engenharia Reversa</td>
+                                <td>Análise completa da placa original</td>
+                                <td>PDF</td>
+                            </tr>
+                            <tr>
+                                <td>Esquemático Elétrico</td>
+                                <td>Diagrama do circuito da nova versão</td>
+                                <td>PDF + Arquivos CAD</td>
+                            </tr>
+                            <tr>
+                                <td>Layout da PCB</td>
+                                <td>Projeto da placa de circuito impresso</td>
+                                <td>Gerber + Arquivos CAD</td>
+                            </tr>
+                            <tr>
+                                <td>Lista de Componentes (BOM)</td>
+                                <td>Especificação completa dos componentes</td>
+                                <td>Excel/CSV</td>
+                            </tr>
+                            <tr>
+                                <td>Código Fonte do Firmware</td>
+                                <td>Programa do microcontrolador</td>
+                                <td>Arquivos de código + HEX</td>
+                            </tr>
+                            <tr>
+                                <td>Relatório de Testes</td>
+                                <td>Resultados dos testes de validação</td>
+                                <td>PDF</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
                 <h3 class="subsection-title">4.2. Protótipos Funcionais</h3>
                 <div class="text-content">
@@ -827,44 +888,46 @@
                         <strong>Estimativa de Carga Horária por Etapa:</strong>
                     </div>
                     
-                    <table class="specs-table">
-                        <thead>
-                            <tr>
-                                <th>Atividade</th>
-                                <th>Horas Alocadas</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Análise e Engenharia Reversa</td>
-                                <td>15 h</td>
-                            </tr>
-                            <tr>
-                                <td>Desenvolvimento do Hardware</td>
-                                <td>12 h</td>
-                            </tr>
-                            <tr>
-                                <td>Desenvolvimento do Firmware</td>
-                                <td>10 h</td>
-                            </tr>
-                            <tr>
-                                <td>Montagem do Protótipo</td>
-                                <td>5 h</td>
-                            </tr>
-                            <tr>
-                                <td>Testes e Validação</td>
-                                <td>5 h</td>
-                            </tr>
-                            <tr>
-                                <td>Documentação Técnica</td>
-                                <td>3 h</td>
-                            </tr>
-                            <tr style="background: #2a2a2a; font-weight: bold;">
-                                <td><strong>Total</strong></td>
-                                <td><strong>50 horas</strong></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="specs-table">
+                            <thead>
+                                <tr>
+                                    <th>Atividade</th>
+                                    <th>Horas Alocadas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Análise e Engenharia Reversa</td>
+                                    <td>15 h</td>
+                                </tr>
+                                <tr>
+                                    <td>Desenvolvimento do Hardware</td>
+                                    <td>12 h</td>
+                                </tr>
+                                <tr>
+                                    <td>Desenvolvimento do Firmware</td>
+                                    <td>10 h</td>
+                                </tr>
+                                <tr>
+                                    <td>Montagem do Protótipo</td>
+                                    <td>5 h</td>
+                                </tr>
+                                <tr>
+                                    <td>Testes e Validação</td>
+                                    <td>5 h</td>
+                                </tr>
+                                <tr>
+                                    <td>Documentação Técnica</td>
+                                    <td>3 h</td>
+                                </tr>
+                                <tr style="background: #2a2a2a; font-weight: bold;">
+                                    <td><strong>Total</strong></td>
+                                    <td><strong>50 horas</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
                     <div class="price-highlight">
                         Valor Total: R$ 7.450,00
