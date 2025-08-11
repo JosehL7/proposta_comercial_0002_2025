@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proposta Técnica - Engenharia Reversa de Placa Eletrônica</title>
     <style>
-        /* Estilos globais */
         * {
             margin: 0;
             padding: 0;
@@ -17,11 +16,11 @@
             line-height: 1.6;
             color: #ffffff;
             background-color: #0f0f0f;
-            scroll-behavior: smooth; /* Rolagem suave para âncoras */
-            overflow-x: hidden; /* Evita barra de rolagem horizontal */
+            scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
-        /* Menu Lateral (Sidebar) */
+        /* Menu Lateral */
         .sidebar {
             position: fixed;
             left: 0;
@@ -29,11 +28,11 @@
             width: 300px;
             height: 100vh;
             background: linear-gradient(180deg, #1a1a1a 0%, #262626 100%);
-            border-right: 3px solid #22d3ee; /* Borda ciano */
+            border-right: 3px solid #22d3ee;
             z-index: 1000;
             padding: 40px 0;
-            overflow-y: auto; /* Permite rolagem interna se o conteúdo for grande */
-            transition: transform 0.3s ease; /* Animação para abrir/fechar no mobile */
+            overflow-y: auto;
+            transition: transform 0.3s ease;
         }
 
         .sidebar-header {
@@ -68,6 +67,47 @@
             color: #22d3ee;
         }
 
+        /* NOVO: Botões de alternância entre propostas */
+        .proposal-toggle {
+            padding: 0 20px 20px 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #404040;
+        }
+
+        .toggle-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .toggle-btn {
+            flex: 1;
+            padding: 12px 16px;
+            background: #333333;
+            color: #e5e5e5;
+            border: 2px solid #404040;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .toggle-btn:hover {
+            background: rgba(34, 211, 238, 0.1);
+            border-color: #22d3ee;
+            color: #22d3ee;
+        }
+
+        .toggle-btn.active {
+            background: #22d3ee;
+            color: #1a1a1a;
+            border-color: #22d3ee;
+            box-shadow: 0 4px 15px rgba(34, 211, 238, 0.4);
+        }
+
         .nav-menu {
             list-style: none;
             padding: 0 20px;
@@ -84,25 +124,25 @@
             color: #e5e5e5;
             text-decoration: none;
             border-radius: 8px;
-            transition: all 0.3s ease; /* Transição suave para hover e active */
+            transition: all 0.3s ease;
             font-size: 14px;
             position: relative;
-            border: 2px solid transparent; /* Borda transparente para manter o espaçamento */
+            border: 2px solid transparent;
         }
 
         .nav-link:hover {
             background: rgba(34, 211, 238, 0.1);
             color: #22d3ee;
-            transform: translateX(5px); /* Efeito de deslize ao passar o mouse */
+            transform: translateX(5px);
             border-color: #22d3ee;
         }
 
         .nav-link.active {
-            background: #22d3ee !important; /* Fundo ciano quando ativo */
-            color: #1a1a1a !important; /* Texto escuro quando ativo */
+            background: #22d3ee !important;
+            color: #1a1a1a !important;
             transform: translateX(5px);
             border-color: #22d3ee;
-            box-shadow: 0 4px 15px rgba(34, 211, 238, 0.4); /* Sombra para destaque */
+            box-shadow: 0 4px 15px rgba(34, 211, 238, 0.4);
         }
 
         .nav-icon {
@@ -116,12 +156,12 @@
             font-weight: normal;
         }
 
-        /* Ícones padronizados (usando caracteres unicode simples) */
+        /* Ícones padronizados */
         .icon-home::before { content: "⌂"; }
         .icon-search::before { content: "⚲"; }
         .icon-gear::before { content: "⚙"; }
         .icon-check::before { content: "✓"; }
-        .icon-box::before { content: "□"; }
+        .icon-doc::before { content: "◈"; }
         .icon-dollar::before { content: "$"; }
 
         .sidebar-footer {
@@ -138,7 +178,7 @@
 
         /* Conteúdo Principal */
         .main-content {
-            margin-left: 300px; /* Espaço para a sidebar */
+            margin-left: 300px;
             min-height: 100vh;
             background: #0f0f0f;
         }
@@ -146,7 +186,7 @@
         .content-section {
             padding: 60px 50px;
             max-width: 900px;
-            margin: 0 auto; /* Centraliza o conteúdo */
+            margin: 0 auto;
         }
 
         .hero-section {
@@ -246,21 +286,13 @@
             color: #22d3ee;
         }
 
-        /* Container para tabelas responsivas */
-        .table-responsive {
-            overflow-x: auto; /* Permite rolagem horizontal */
-            -webkit-overflow-scrolling: touch; /* Rolagem suave em iOS */
-            width: 100%; /* Garante que o container ocupe a largura total */
-            margin: 25px 0; /* Ajusta a margem para o container */
-        }
-
         .specs-table {
-            width: 100%; /* A tabela deve ocupar 100% do seu container */
-            min-width: 600px; /* Define uma largura mínima para a tabela em telas pequenas */
+            width: 100%;
             border-collapse: collapse;
+            margin: 25px 0;
             background: #262626;
             border-radius: 8px;
-            overflow: hidden; /* Garante que o border-radius seja aplicado */
+            overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
@@ -428,7 +460,7 @@
 
         /* Menu Toggle para Mobile */
         .menu-toggle {
-            display: none; /* Escondido por padrão */
+            display: none;
             position: fixed;
             top: 20px;
             left: 20px;
@@ -440,31 +472,25 @@
             border-radius: 8px;
             cursor: pointer;
             font-size: 18px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            transition: transform 0.2s ease;
-        }
-
-        .menu-toggle:active {
-            transform: scale(0.95);
         }
 
         /* Responsivo */
         @media (max-width: 768px) {
             .menu-toggle {
-                display: block; /* Mostra o botão de toggle no mobile */
+                display: block;
             }
 
             .sidebar {
-                transform: translateX(-100%); /* Esconde a sidebar por padrão */
+                transform: translateX(-100%);
                 width: 280px;
             }
 
             .sidebar.active {
-                transform: translateX(0); /* Mostra a sidebar quando ativa */
+                transform: translateX(0);
             }
 
             .main-content {
-                margin-left: 0; /* Remove a margem da sidebar no mobile */
+                margin-left: 0;
             }
 
             .content-section {
@@ -477,10 +503,6 @@
 
             .hero-title {
                 font-size: 36px;
-            }
-
-            .hero-subtitle {
-                font-size: 20px;
             }
 
             .commercial-section {
@@ -497,41 +519,9 @@
                 margin-bottom: 15px;
             }
 
-            .specs-table th,
-            .specs-table td {
-                padding: 12px; /* Reduz o padding das células da tabela */
-                font-size: 13px; /* Reduz o tamanho da fonte da tabela */
-            }
-
-            .contact-info {
-                grid-template-columns: 1fr; /* Empilha os itens de contato em uma única coluna */
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-title {
-                font-size: 28px;
-            }
-
-            .hero-subtitle {
-                font-size: 18px;
-            }
-
-            .section-title {
-                font-size: 28px;
-            }
-
-            .subsection-title {
-                font-size: 20px;
-            }
-
-            .price-highlight {
-                font-size: 28px;
-                padding: 30px;
-            }
-
-            .specs-table {
-                min-width: 500px; /* Garante que a tabela ainda tenha uma largura mínima para rolagem */
+            .toggle-buttons {
+                flex-direction: column;
+                gap: 8px;
             }
         }
 
@@ -547,12 +537,20 @@
             }
         }
 
-        /* Aplica atraso na animação para cada seção */
         .section:nth-child(1) { animation-delay: 0.1s; }
         .section:nth-child(2) { animation-delay: 0.2s; }
         .section:nth-child(3) { animation-delay: 0.3s; }
         .section:nth-child(4) { animation-delay: 0.4s; }
         .section:nth-child(5) { animation-delay: 0.5s; }
+
+        /* Ocultar conteúdo das propostas */
+        .proposal-content {
+            display: none;
+        }
+
+        .proposal-content.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -566,15 +564,27 @@
                 <div class="company-name">José Ferreira</div>
                 <div class="company-cnpj">CNPJ: 61.066.694/0001-54</div>
                 <div class="proposal-number">
-                    <strong>Proposta Nº:</strong> 0002/2025
+                    <strong>Proposta Nº:</strong> <span id="proposal-number">0001/2025</span>
                 </div>
+            </div>
+        </div>
+
+        <!-- NOVO: Botões de alternância entre propostas -->
+        <div class="proposal-toggle">
+            <div class="toggle-buttons">
+                <button class="toggle-btn active" onclick="switchProposal(1)" id="btn-proposal-1">
+                    Proposta 1
+                </button>
+                <button class="toggle-btn" onclick="switchProposal(2)" id="btn-proposal-2">
+                    Proposta 2
+                </button>
             </div>
         </div>
 
         <nav>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="#hero" class="nav-link active" data-section="hero">
+                    <a href="#hero" class="nav-link" data-section="hero">
                         <span class="nav-icon icon-home"></span>
                         Início
                     </a>
@@ -599,7 +609,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="#secao4" class="nav-link" data-section="secao4">
-                        <span class="nav-icon icon-box"></span>
+                        <span class="nav-icon icon-doc"></span>
                         Entregáveis
                     </a>
                 </li>
@@ -607,15 +617,6 @@
                     <a href="#secao5" class="nav-link" data-section="secao5">
                         <span class="nav-icon icon-dollar"></span>
                         Condições Comerciais
-
-                    </a>
-                </li>
-                
-                <li class="nav-item">
-                    <a href="./proposta2.html" class="nav-link" data-section="secao6">
-                        <span class="nav-icon icon-dollar"></span>
-                        Novas Proposta
-                        
                     </a>
                 </li>
             </ul>
@@ -628,34 +629,35 @@
 
     <!-- Conteúdo Principal -->
     <div class="main-content">
-        <!-- Hero Section -->
-        <section class="hero-section" id="hero">
-            <div class="hero-date">JULHO 2025</div>
-            <h1 class="hero-title">Proposta Técnica</h1>
-            <p class="hero-subtitle">Engenharia Reversa de Placa Eletrônica<br>Sensor de Ensujamento de Filtro</p>
-            
-            <div class="client-info">
-                <div class="client-label">Cliente:</div>
-                <div class="client-name">Eximport Lubequip Sistemas de Lubrificação Ltda.</div>
-            </div>
-        </section>
-
-        <!-- Seção 1: Análise e Engenharia Reversa -->
-        <section class="content-section">
-            <div class="section" id="secao1">
-                <h2 class="section-title">1. Análise e Engenharia Reversa</h2>
+        <!-- PROPOSTA 1 -->
+        <div class="proposal-content active" id="proposal-1">
+            <!-- Hero Section -->
+            <section class="hero-section" id="hero">
+                <div class="hero-date">JULHO 2025</div>
+                <h1 class="hero-title">Proposta Técnica</h1>
+                <p class="hero-subtitle">Engenharia Reversa de Placa Eletrônica<br>Sensor de Ensujamento de Filtro</p>
                 
-                <h3 class="subsection-title">1.1. Objetivo do Projeto</h3>
-                <div class="text-content">
-                    Realizar a engenharia reversa completa da placa eletrônica existente, utilizada como sensor de ensujamento de filtro, com o objetivo de compreender sua lógica de funcionamento e replicar sua funcionalidade em uma nova versão equivalente. O projeto visa garantir que a nova implementação mantenha todas as características operacionais do circuito original.
+                <div class="client-info">
+                    <div class="client-label">Cliente:</div>
+                    <div class="client-name">Eximport Lubequip Sistemas de Lubrificação Ltda.</div>
                 </div>
+            </section>
 
-                <h3 class="subsection-title">1.2. Componentes Identificados</h3>
-                <div class="highlight-box">
-                    <strong>Análise preliminar da placa existente:</strong> Durante visita técnica ao cliente, foi realizada análise detalhada da placa física em mãos, permitindo identificação precisa dos principais componentes que compõem o sistema atual.
-                </div>
+            <!-- Seção 1: Análise e Engenharia Reversa -->
+            <section class="content-section">
+                <div class="section" id="secao1">
+                    <h2 class="section-title">1. Análise e Engenharia Reversa</h2>
+                    
+                    <h3 class="subsection-title">1.1. Objetivo do Projeto</h3>
+                    <div class="text-content">
+                        Realizar a engenharia reversa completa da placa eletrônica existente, utilizada como sensor de ensujamento de filtro, com o objetivo de compreender sua lógica de funcionamento e replicar sua funcionalidade em uma nova versão equivalente. O projeto visa garantir que a nova implementação mantenha todas as características operacionais do circuito original.
+                    </div>
 
-                <div class="table-responsive">
+                    <h3 class="subsection-title">1.2. Componentes Identificados</h3>
+                    <div class="highlight-box">
+                        <strong>Análise preliminar da placa existente:</strong> Durante visita técnica ao cliente, foi realizada análise detalhada da placa física em mãos, permitindo identificação precisa dos principais componentes que compõem o sistema atual.
+                    </div>
+
                     <table class="specs-table">
                         <thead>
                             <tr>
@@ -687,58 +689,56 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
 
-                <h3 class="subsection-title">1.3. Funcionamento do Sistema</h3>
-                <div class="text-content">
-                    O sistema opera como um sensor de ensujamento de filtro, onde uma membrana plástica, ao ser pressionada devido ao acúmulo de pressão causado pelo ensujamento, aciona o botão presente na placa eletrônica. Este acionamento resulta no acendimento do LED, sinalizando a condição de ensujamento do filtro.
-                </div>
+                    <h3 class="subsection-title">1.3. Funcionamento do Sistema</h3>
+                    <div class="text-content">
+                        O sistema opera como um sensor de ensujamento de filtro, onde uma membrana plástica, ao ser pressionada devido ao acúmulo de pressão causado pelo ensujamento, aciona o botão presente na placa eletrônica. Este acionamento resulta no acendimento do LED, sinalizando a condição de ensujamento do filtro.
+                    </div>
 
-                <div class="text-content">
-                    Apesar da aparente simplicidade do sistema, existe uma lógica de funcionamento específica implementada no microcontrolador que precisa ser analisada e compreendida durante o processo de engenharia reversa. Esta lógica pode incluir temporização, debounce do botão, controle de consumo de energia, ou outras funcionalidades não evidentes na análise visual inicial.
-                </div>
+                    <div class="text-content">
+                        Apesar da aparente simplicidade do sistema, existe uma lógica de funcionamento específica implementada no microcontrolador que precisa ser analisada e compreendida durante o processo de engenharia reversa. Esta lógica pode incluir temporização, debounce do botão, controle de consumo de energia, ou outras funcionalidades não evidentes na análise visual inicial.
+                    </div>
 
-                <h3 class="subsection-title">1.4. Metodologia de Análise</h3>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-number">1</div>
-                        <div class="timeline-content">
-                            <strong>Análise Visual e Documentação:</strong> Mapeamento completo dos componentes, trilhas e conexões da placa original
+                    <h3 class="subsection-title">1.4. Metodologia de Análise</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-number">1</div>
+                            <div class="timeline-content">
+                                <strong>Análise Visual e Documentação:</strong> Mapeamento completo dos componentes, trilhas e conexões da placa original
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-number">2</div>
+                            <div class="timeline-content">
+                                <strong>Identificação de Componentes:</strong> Levantamento de especificações técnicas de todos os componentes utilizados
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-number">3</div>
+                            <div class="timeline-content">
+                                <strong>Análise do Firmware:</strong> Extração e análise do código do microcontrolador para compreensão da lógica
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-number">4</div>
+                            <div class="timeline-content">
+                                <strong>Testes Funcionais:</strong> Verificação do comportamento operacional em diferentes condições
+                            </div>
                         </div>
                     </div>
-                    <div class="timeline-item">
-                        <div class="timeline-number">2</div>
-                        <div class="timeline-content">
-                            <strong>Identificação de Componentes:</strong> Levantamento de especificações técnicas de todos os componentes utilizados
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-number">3</div>
-                        <div class="timeline-content">
-                            <strong>Análise do Firmware:</strong> Extração e análise do código do microcontrolador para compreensão da lógica
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-number">4</div>
-                        <div class="timeline-content">
-                            <strong>Testes Funcionais:</strong> Verificação do comportamento operacional em diferentes condições
-                        </div>
-                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Seção 2: Desenvolvimento da Nova Versão -->
-        <section class="content-section">
-            <div class="section" id="secao2">
-                <h2 class="section-title">2. Desenvolvimento da Nova Versão</h2>
-                
-                <h3 class="subsection-title">2.2. Especificações Técnicas</h3>
-                <div class="text-content">
-                    Com base na análise da placa original, a nova versão será desenvolvida mantendo as mesmas especificações funcionais, porém com possíveis melhorias na implementação, utilizando componentes atuais e técnicas modernas de desenvolvimento eletrônico.
-                </div>
+            <!-- Seção 2: Desenvolvimento da Nova Versão -->
+            <section class="content-section">
+                <div class="section" id="secao2">
+                    <h2 class="section-title">2. Desenvolvimento da Nova Versão</h2>
+                    
+                    <h3 class="subsection-title">2.1. Especificações Técnicas</h3>
+                    <div class="text-content">
+                        Com base na análise da placa original, a nova versão será desenvolvida mantendo as mesmas especificações funcionais, porém com possíveis melhorias na implementação, utilizando componentes atuais e técnicas modernas de desenvolvimento eletrônico.
+                    </div>
 
-                <div class="table-responsive">
                     <table class="specs-table">
                         <thead>
                             <tr>
@@ -775,66 +775,64 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
 
-                <h3 class="subsection-title">2.2. Arquitetura do Sistema</h3>
-                <div class="text-content">
-                    A nova implementação manterá a arquitetura básica do sistema original, consistindo em um microcontrolador de baixo consumo, circuito de acionamento do LED, interface para o botão com tratamento de debounce, e sistema de gerenciamento de energia para maximizar a vida útil da bateria.
-                </div>
-
-                <div class="highlight-box">
-                    <strong>Melhorias Propostas:</strong> A nova versão poderá incorporar melhorias como melhor eficiência energética, componentes com maior disponibilidade no mercado, e possível adição de funcionalidades de diagnóstico.
-                </div>
-            </div>
-        </section>
-
-        <!-- Seção 3: Testes e Validação -->
-        <section class="content-section">
-            <div class="section" id="secao3">
-                <h2 class="section-title">3. Testes e Validação</h2>
-                
-                <h3 class="subsection-title">3.1. Protocolo de Testes</h3>
-                <div class="text-content">
-                    Será estabelecido um protocolo rigoroso de testes para garantir que a nova versão funcione de forma equivalente ao sistema original. Os testes incluirão validação funcional, testes de consumo de energia, testes de durabilidade e testes em condições ambientais variadas.
-                </div>
-
-                <h3 class="subsection-title">3.2. Critérios de Aceitação</h3>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-number">✓</div>
-                        <div class="timeline-content">
-                            <strong>Funcionalidade:</strong> Acionamento correto do LED mediante pressão do botão
-                        </div>
+                    <h3 class="subsection-title">2.2. Arquitetura do Sistema</h3>
+                    <div class="text-content">
+                        A nova implementação manterá a arquitetura básica do sistema original, consistindo em um microcontrolador de baixo consumo, circuito de acionamento do LED, interface para o botão com tratamento de debounce, e sistema de gerenciamento de energia para maximizar a vida útil da bateria.
                     </div>
-                    <div class="timeline-item">
-                        <div class="timeline-number">✓</div>
-                        <div class="timeline-content">
-                            <strong>Consumo de Energia:</strong> Consumo igual ou inferior ao sistema original
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-number">✓</div>
-                        <div class="timeline-content">
-                            <strong>Compatibilidade:</strong> Dimensões e interfaces compatíveis com o sistema existente
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-number">✓</div>
-                        <div class="timeline-content">
-                            <strong>Confiabilidade:</strong> Operação estável em condições normais de uso
-                        </div>
+
+                    <div class="highlight-box">
+                        <strong>Melhorias Propostas:</strong> A nova versão poderá incorporar melhorias como melhor eficiência energética, componentes com maior disponibilidade no mercado, e possível adição de funcionalidades de diagnóstico.
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Seção 4: Entregáveis -->
-        <section class="content-section">
-            <div class="section" id="secao4">
-                <h2 class="section-title">4. Entregáveis do Projeto</h2>
-                
-                <h3 class="subsection-title">4.1. Documentação Técnica</h3>
-                <div class="table-responsive">
+            <!-- Seção 3: Testes e Validação -->
+            <section class="content-section">
+                <div class="section" id="secao3">
+                    <h2 class="section-title">3. Testes e Validação</h2>
+                    
+                    <h3 class="subsection-title">3.1. Protocolo de Testes</h3>
+                    <div class="text-content">
+                        Será estabelecido um protocolo rigoroso de testes para garantir que a nova versão funcione de forma equivalente ao sistema original. Os testes incluirão validação funcional, testes de consumo de energia, testes de durabilidade e testes em condições ambientais variadas.
+                    </div>
+
+                    <h3 class="subsection-title">3.2. Critérios de Aceitação</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-number">✓</div>
+                            <div class="timeline-content">
+                                <strong>Funcionalidade:</strong> Acionamento correto do LED mediante pressão do botão
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-number">✓</div>
+                            <div class="timeline-content">
+                                <strong>Consumo de Energia:</strong> Consumo igual ou inferior ao sistema original
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-number">✓</div>
+                            <div class="timeline-content">
+                                <strong>Compatibilidade:</strong> Dimensões e interfaces compatíveis com o sistema existente
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-number">✓</div>
+                            <div class="timeline-content">
+                                <strong>Confiabilidade:</strong> Operação estável em condições normais de uso
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção 4: Entregáveis -->
+            <section class="content-section">
+                <div class="section" id="secao4">
+                    <h2 class="section-title">4. Entregáveis do Projeto</h2>
+                    
+                    <h3 class="subsection-title">4.1. Documentação Técnica</h3>
                     <table class="specs-table">
                         <thead>
                             <tr>
@@ -876,28 +874,26 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
 
-                <h3 class="subsection-title">4.2. Protótipos Funcionais</h3>
-                <div class="text-content">
-                    Serão fornecidas <strong>5 amostras funcionais</strong> da nova versão, montadas e testadas, demonstrando equivalência funcional com o sistema original. As amostras serão produzidas na China com componentes de qualidade industrial.
-                </div>
-            </div>
-        </section>
-
-        <!-- Seção 5: Condições Comerciais -->
-        <section class="content-section">
-            <div class="section" id="secao5">
-                <h2 class="section-title">5. Condições Comerciais</h2>
-                
-                <div class="commercial-section">
-                    <h3 class="subsection-title">5.1. Investimento</h3>
-                    
+                    <h3 class="subsection-title">4.2. Protótipos Funcionais</h3>
                     <div class="text-content">
-                        <strong>Estimativa de Carga Horária por Etapa:</strong>
+                        Serão fornecidas <strong>5 amostras funcionais</strong> da nova versão, montadas e testadas, demonstrando equivalência funcional com o sistema original. As amostras serão produzidas na China com componentes de qualidade industrial.
                     </div>
+                </div>
+            </section>
+
+            <!-- Seção 5: Condições Comerciais -->
+            <section class="content-section">
+                <div class="section" id="secao5">
+                    <h2 class="section-title">5. Condições Comerciais</h2>
                     
-                    <div class="table-responsive">
+                    <div class="commercial-section">
+                        <h3 class="subsection-title">5.1. Investimento</h3>
+                        
+                        <div class="text-content">
+                            <strong>Estimativa de Carga Horária por Etapa:</strong>
+                        </div>
+                        
                         <table class="specs-table">
                             <thead>
                                 <tr>
@@ -936,207 +932,622 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
 
-                    <div class="price-highlight">
-                        Valor Total: R$ 7.450,00
-                        <div class="subtitle-price">
-                            (desenvolvimento + 5 amostras funcionais)
+                        <div class="price-highlight">
+                            Valor Total: R$ 7.450,00
+                            <div class="subtitle-price">
+                                (desenvolvimento + 5 amostras funcionais)
+                            </div>
+                        </div>
+
+                        <div class="text-content">
+                            <strong>Forma de pagamento:</strong> A negociar
+                        </div>
+
+                        <div class="highlight-box">
+                            <strong>Observação:</strong> Este valor inclui desenvolvimento completo e 5 amostras funcionais montadas. Componentes para montagem adicional serão orçados separadamente conforme necessidade.
                         </div>
                     </div>
 
+                    <h3 class="subsection-title">5.2. Prazo de Execução</h3>
                     <div class="text-content">
-                        <strong>Forma de pagamento:</strong> A negociar
+                        O prazo estimado para conclusão completa do projeto é de <strong>7 a 8 semanas</strong> a partir da assinatura da proposta, sendo:
+                    </div>
+                    <ul class="guarantee-list">
+                        <li><strong>4 semanas:</strong> Desenvolvimento completo e documentação</li>
+                        <li><strong>2-3 semanas:</strong> Produção e entrega das 5 amostras da China</li>
+                        <li><strong>1 semana:</strong> Testes finais e validação das amostras</li>
+                    </ul>
+
+                    <h3 class="subsection-title">5.3. Garantias</h3>
+                    <ul class="guarantee-list">
+                        <li>Suporte técnico por 90 dias após a entrega final</li>
+                        <li>Correções na documentação ou firmware sem custo durante o período de garantia</li>
+                        <li>Garantia de funcionamento das amostras por 6 meses</li>
+                    </ul>
+
+                    <h3 class="subsection-title">5.4. Limitações e Observações</h3>
+                    <ul class="guarantee-list">
+                        <li>O projeto está sujeito à viabilidade técnica identificada durante a análise inicial</li>
+                        <li>Componentes obsoletos ou de difícil obtenção poderão ser substituídos por equivalentes</li>
+                        <li>Alterações no escopo durante o desenvolvimento poderão impactar prazo e valor</li>
+                        <li>A placa original deverá ser fornecida em bom estado para análise</li>
+                    </ul>
+
+                    <h3 class="subsection-title">5.5. Direitos e Comercialização</h3>
+                    <ul class="guarantee-list">
+                        <li>O cliente terá plena posse de todos os arquivos técnicos desenvolvidos</li>
+                        <li>Direito de acesso completo aos arquivos para produção e modificação</li>
+                        <li>Após o desenvolvimento, será estabelecido acordo comercial para fornecimento contínuo das placas</li>
+                        <li>O desenvolvedor reserva-se o direito de divulgar o projeto em portfólio, respeitando confidencialidade de informações sensíveis</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <section class="footer-section">
+                <div class="footer-title">Proposta válida por 30 dias</div>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-label">E-mail</div>
+                        <div class="contact-value">joseferreira9776@gmail.com</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-label">Telefone / WhatsApp</div>
+                        <div class="contact-value">(11) 98340-5944</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-label">CNPJ</div>
+                        <div class="contact-value">61.066.694/0001-54</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- PROPOSTA 2 -->
+        <div class="proposal-content" id="proposal-2">
+            <!-- Hero Section -->
+            <section class="hero-section" id="hero">
+                <div class="hero-date">JULHO 2025</div>
+                <h1 class="hero-title">Proposta Técnica</h1>
+                <p class="hero-subtitle">Engenharia Reversa de Placa Eletrônica<br>Sensor de Ensujamento de Filtro</p>
+                
+                <div class="client-info">
+                    <div class="client-label">Cliente:</div>
+                    <div class="client-name">Eximport Lubequip Sistemas de Lubrificação Ltda.</div>
+                </div>
+            </section>
+
+            <!-- Seção 1: Análise e Engenharia Reversa -->
+            <section class="content-section">
+                <div class="section" id="secao1">
+                    <h2 class="section-title">1. Análise e Engenharia Reversa</h2>
+                    
+                    <h3 class="subsection-title">1.1. Objetivo do Projeto</h3>
+                    <div class="text-content">
+                        Realizar a engenharia reversa completa da placa eletrônica existente, utilizada como sensor de ensujamento de filtro, com o objetivo de compreender sua lógica de funcionamento e replicar sua funcionalidade em uma nova versão equivalente. <strong>Adicionalmente, será implementada uma saída digital para integração com o módulo LoRaWAN existente do cliente.</strong>
+                    </div>
+
+                    <h3 class="subsection-title">1.2. Componentes Identificados</h3>
+                    <div class="highlight-box">
+                        <strong>Análise preliminar da placa existente:</strong> Durante visita técnica ao cliente, foi realizada análise detalhada da placa física em mãos, permitindo identificação precisa dos principais componentes que compõem o sistema atual.
+                    </div>
+
+                    <table class="specs-table">
+                        <thead>
+                            <tr>
+                                <th>Componente</th>
+                                <th>Tipo</th>
+                                <th>Função</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>LED com suporte</td>
+                                <td>Indicador visual</td>
+                                <td>Sinalização de acionamento do sensor</td>
+                            </tr>
+                            <tr>
+                                <td>Bateria de lítio</td>
+                                <td>Fonte de alimentação</td>
+                                <td>Alimentação autônoma do circuito</td>
+                            </tr>
+                            <tr>
+                                <td>Microcontrolador</td>
+                                <td>Unidade de processamento</td>
+                                <td>Controle da lógica de funcionamento</td>
+                            </tr>
+                            <tr>
+                                <td>Botão</td>
+                                <td>Entrada digital</td>
+                                <td>Acionamento via pressão da membrana</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-title">1.3. Funcionamento do Sistema</h3>
+                    <div class="text-content">
+                        O sistema opera como um sensor de ensujamento de filtro, onde uma membrana plástica, ao ser pressionada devido ao acúmulo de pressão causado pelo ensujamento, aciona o botão presente na placa eletrônica. Este acionamento resulta no acendimento do LED, sinalizando a condição de ensujamento do filtro.
                     </div>
 
                     <div class="highlight-box">
-                        <strong>Observação:</strong> Este valor inclui desenvolvimento completo e 5 amostras funcionais montadas. Componentes para montagem adicional serão orçados separadamente conforme necessidade.
+                        <strong>Funcionalidade Adicional:</strong> Simultaneamente ao acionamento do LED, será ativada uma saída digital que enviará um sinal (0 ou 1) para o módulo LoRaWAN do cliente.
+                    </div>
+
+                    <h3 class="subsection-title">1.4. Metodologia de Análise</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-number">1</div>
+                            <div class="timeline-content">
+                                <strong>Análise Visual e Documentação:</strong> Mapeamento completo dos componentes, trilhas e conexões da placa original
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-number">2</div>
+                            <div class="timeline-content">
+                                <strong>Identificação de Componentes:</strong> Levantamento de especificações técnicas de todos os componentes utilizados
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-number">3</div>
+                            <div class="timeline-content">
+                                <strong>Análise do Firmware:</strong> Extração e análise do código do microcontrolador para compreensão da lógica
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-number">4</div>
+                            <div class="timeline-content">
+                                <strong>Testes Funcionais:</strong> Verificação do comportamento operacional em diferentes condições
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </section>
 
-                <h3 class="subsection-title">5.2. Prazo de Execução</h3>
-                <div class="text-content">
-                    O prazo estimado para conclusão completa do projeto é de <strong>7 a 8 semanas</strong> a partir da assinatura da proposta, sendo:
+            <!-- Seção 2: Desenvolvimento da Nova Versão -->
+            <section class="content-section">
+                <div class="section" id="secao2">
+                    <h2 class="section-title">2. Desenvolvimento da Nova Versão</h2>
+                    
+                    <h3 class="subsection-title">2.1. Especificações Técnicas</h3>
+                    <div class="text-content">
+                        Com base na análise da placa original, a nova versão será desenvolvida mantendo as mesmas especificações funcionais, porém com a adição da saída digital e possíveis melhorias na implementação.
+                    </div>
+
+                    <table class="specs-table">
+                        <thead>
+                            <tr>
+                                <th>Especificação</th>
+                                <th>Valor/Descrição</th>
+                                <th>Observações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Tensão de Alimentação</td>
+                                <td>3.0V - 3.7V (Bateria Li-ion)</td>
+                                <td>Compatível com bateria original</td>
+                            </tr>
+                            <tr>
+                                <td>Corrente de Operação</td>
+                                <td>< 50mA (LED aceso)</td>
+                                <td>Baixo consumo para autonomia</td>
+                            </tr>
+                            <tr>
+                                <td>Corrente em Standby</td>
+                                <td>< 10µA</td>
+                                <td>Modo de baixo consumo</td>
+                            </tr>
+                            <tr>
+                                <td>Temperatura de Operação</td>
+                                <td>-10°C a +60°C</td>
+                                <td>Ambiente industrial típico</td>
+                            </tr>
+                            <tr>
+                                <td>Dimensões da Placa</td>
+                                <td>Equivalente à original</td>
+                                <td>Compatibilidade mecânica</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-title">2.2. Arquitetura do Sistema</h3>
+                    <div class="text-content">
+                        A nova implementação manterá a arquitetura básica do sistema original, consistindo em um microcontrolador de baixo consumo, circuito de acionamento do LED, interface para o botão com tratamento de debounce, sistema de gerenciamento de energia e a nova saída digital.
+                    </div>
+
+                    <div class="highlight-box">
+                        <strong>Melhorias Propostas:</strong> A nova versão incorporará melhor eficiência energética, componentes com maior disponibilidade no mercado, e a funcionalidade de saída digital para integração com o sistema de monitoramento existente.
+                    </div>
                 </div>
-                <ul class="guarantee-list">
-                    <li><strong>4 semanas:</strong> Desenvolvimento completo e documentação</li>
-                    <li><strong>2-3 semanas:</strong> Produção e entrega das 5 amostras da China</li>
-                    <li><strong>1 semana:</strong> Testes finais e validação das amostras</li>
-                </ul>
+            </section>
 
-                <h3 class="subsection-title">5.3. Garantias</h3>
-                <ul class="guarantee-list">
-                    <li>Suporte técnico por 90 dias após a entrega final</li>
-                    <li>Correções na documentação ou firmware sem custo durante o período de garantia</li>
-                    <li>Garantia de funcionamento das amostras por 6 meses</li>
-                </ul>
+            <!-- Seção 3: Testes e Validação -->
+            <section class="content-section">
+                <div class="section" id="secao3">
+                    <h2 class="section-title">3. Testes e Validação</h2>
+                    
+                    <h3 class="subsection-title">3.1. Protocolo de Testes</h3>
+                    <div class="text-content">
+                        Será estabelecido um protocolo rigoroso de testes para garantir que a nova versão funcione de forma equivalente ao sistema original, incluindo validação da nova saída digital. Os testes incluirão validação funcional, testes de consumo de energia, testes de durabilidade e testes da saída digital.
+                    </div>
 
-                <h3 class="subsection-title">5.4. Limitações e Observações</h3>
-                <ul class="guarantee-list">
-                    <li>O projeto está sujeito à viabilidade técnica identificada durante a análise inicial</li>
-                    <li>Componentes obsoletos ou de difícil obtenção poderão ser substituídos por equivalentes</li>
-                    <li>Alterações no escopo durante o desenvolvimento poderão impactar prazo e valor</li>
-                    <li>A placa original deverá ser fornecida em bom estado para análise</li>
-                </ul>
-
-                <h3 class="subsection-title">5.5. Direitos e Comercialização</h3>
-                <ul class="guarantee-list">
-                    <li>O cliente terá plena posse de todos os arquivos técnicos desenvolvidos</li>
-                    <li>Direito de acesso completo aos arquivos para produção e modificação</li>
-                    <li>Após o desenvolvimento, será estabelecido acordo comercial para fornecimento contínuo das placas</li>
-                    <li>O desenvolvedor reserva-se o direito de divulgar o projeto em portfólio, respeitando confidencialidade de informações sensíveis</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <section class="footer-section">
-            <div class="footer-title">Proposta válida por 30 dias</div>
-            
-            <div class="contact-info">
-                <div class="contact-item">
-                    <div class="contact-label">E-mail</div>
-                    <div class="contact-value">joseferreira9776@gmail.com</div>
+                    <h3 class="subsection-title">3.2. Critérios de Aceitação</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-number">✓</div>
+                            <div class="timeline-content">
+                                <strong>Funcionalidade:</strong> Acionamento correto do LED mediante pressão do botão
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-number">✓</div>
+                            <div class="timeline-content">
+                                <strong>Consumo de Energia:</strong> Consumo igual ou inferior ao sistema original
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-number">✓</div>
+                            <div class="timeline-content">
+                                <strong>Compatibilidade:</strong> Dimensões e interfaces compatíveis com o sistema existente
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-number">✓</div>
+                            <div class="timeline-content">
+                                <strong>Confiabilidade:</strong> Operação estável em condições normais de uso
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-number">✓</div>
+                            <div class="timeline-content">
+                                <strong>Saída Digital:</strong> Sinal digital correto sincronizado com LED
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="contact-item">
-                    <div class="contact-label">Telefone / WhatsApp</div>
-                    <div class="contact-value">(11) 98340-5944</div>
+            </section>
+
+            <!-- Seção 4: Entregáveis -->
+            <section class="content-section">
+                <div class="section" id="secao4">
+                    <h2 class="section-title">4. Entregáveis do Projeto</h2>
+                    
+                    <h3 class="subsection-title">4.1. Documentação Técnica</h3>
+                    <table class="specs-table">
+                        <thead>
+                            <tr>
+                                <th>Documento</th>
+                                <th>Descrição</th>
+                                <th>Formato</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Relatório de Engenharia Reversa</td>
+                                <td>Análise completa da placa original</td>
+                                <td>PDF</td>
+                            </tr>
+                            <tr>
+                                <td>Esquemático Elétrico</td>
+                                <td>Diagrama do circuito da nova versão</td>
+                                <td>PDF + Arquivos CAD</td>
+                            </tr>
+                            <tr>
+                                <td>Layout da PCB</td>
+                                <td>Projeto da placa de circuito impresso</td>
+                                <td>Gerber + Arquivos CAD</td>
+                            </tr>
+                            <tr>
+                                <td>Lista de Componentes (BOM)</td>
+                                <td>Especificação completa dos componentes</td>
+                                <td>Excel/CSV</td>
+                            </tr>
+                            <tr>
+                                <td>Código Fonte do Firmware</td>
+                                <td>Programa do microcontrolador</td>
+                                <td>Arquivos de código + HEX</td>
+                            </tr>
+                            <tr>
+                                <td>Relatório de Testes</td>
+                                <td>Resultados dos testes de validação</td>
+                                <td>PDF</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-title">4.2. Protótipos Funcionais</h3>
+                    <div class="text-content">
+                        Serão fornecidas <strong>5 amostras funcionais</strong> da nova versão com saída digital, montadas e testadas, demonstrando equivalência funcional com o sistema original mais a nova funcionalidade. As amostras serão produzidas na China com componentes de qualidade industrial.
+                    </div>
                 </div>
-                <div class="contact-item">
-                    <div class="contact-label">CNPJ</div>
-                    <div class="contact-value">61.066.694/0001-54</div>
+            </section>
+
+            <!-- Seção 5: Condições Comerciais -->
+            <section class="content-section">
+                <div class="section" id="secao5">
+                    <h2 class="section-title">5. Condições Comerciais</h2>
+                    
+                    <div class="commercial-section">
+                        <h3 class="subsection-title">5.1. Investimento</h3>
+                        
+                        <div class="text-content">
+                            <strong>Estimativa de Carga Horária por Etapa:</strong>
+                        </div>
+                        
+                        <table class="specs-table">
+                            <thead>
+                                <tr>
+                                    <th>Atividade</th>
+                                    <th>Horas Alocadas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Análise e Engenharia Reversa</td>
+                                    <td>15 h</td>
+                                </tr>
+                                <tr>
+                                    <td>Desenvolvimento do Hardware</td>
+                                    <td>13 h</td>
+                                </tr>
+                                <tr>
+                                    <td>Desenvolvimento do Firmware</td>
+                                    <td>12 h</td>
+                                </tr>
+                                <tr>
+                                    <td>Montagem do Protótipo</td>
+                                    <td>5 h</td>
+                                </tr>
+                                <tr>
+                                    <td>Testes e Validação</td>
+                                    <td>6 h</td>
+                                </tr>
+                                <tr>
+                                    <td>Documentação Técnica</td>
+                                    <td>4 h</td>
+                                </tr>
+                                <tr style="background: #2a2a2a; font-weight: bold;">
+                                    <td><strong>Total</strong></td>
+                                    <td><strong>55 horas</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="price-highlight">
+                            Valor Total: R$ 8.125,00
+                            <div class="subtitle-price">
+                                (desenvolvimento + 5 amostras funcionais)
+                            </div>
+                        </div>
+
+                        <div class="text-content">
+                            <strong>Forma de pagamento:</strong> A negociar
+                        </div>
+
+                        <div class="highlight-box">
+                            <strong>Observação:</strong> Este valor inclui desenvolvimento completo com saída digital e 5 amostras funcionais montadas. Componentes para montagem adicional serão orçados separadamente conforme necessidade.
+                        </div>
+                    </div>
+
+                    <h3 class="subsection-title">5.2. Prazo de Execução</h3>
+                    <div class="text-content">
+                        O prazo estimado para conclusão completa do projeto é de <strong>7 a 8 semanas</strong> a partir da assinatura da proposta, sendo:
+                    </div>
+                    <ul class="guarantee-list">
+                        <li><strong>4 semanas:</strong> Desenvolvimento completo e documentação</li>
+                        <li><strong>2-3 semanas:</strong> Produção e entrega das 5 amostras da China</li>
+                        <li><strong>1 semana:</strong> Testes finais e validação das amostras</li>
+                    </ul>
+
+                    <h3 class="subsection-title">5.3. Garantias</h3>
+                    <ul class="guarantee-list">
+                        <li>Suporte técnico por 90 dias após a entrega final</li>
+                        <li>Correções na documentação ou firmware sem custo durante o período de garantia</li>
+                        <li>Garantia de funcionamento das amostras por 6 meses</li>
+                    </ul>
+
+                    <h3 class="subsection-title">5.4. Limitações e Observações</h3>
+                    <ul class="guarantee-list">
+                        <li>O projeto está sujeito à viabilidade técnica identificada durante a análise inicial</li>
+                        <li>Componentes obsoletos ou de difícil obtenção poderão ser substituídos por equivalentes</li>
+                        <li>Alterações no escopo durante o desenvolvimento poderão impactar prazo e valor</li>
+                        <li>A placa original deverá ser fornecida em bom estado para análise</li>
+                    </ul>
+
+                    <h3 class="subsection-title">5.5. Direitos e Comercialização</h3>
+                    <ul class="guarantee-list">
+                        <li>O cliente terá plena posse de todos os arquivos técnicos desenvolvidos</li>
+                        <li>Direito de acesso completo aos arquivos para produção e modificação</li>
+                        <li>Após o desenvolvimento, será estabelecido acordo comercial para fornecimento contínuo das placas</li>
+                        <li>O desenvolvedor reserva-se o direito de divulgar o projeto em portfólio, respeitando confidencialidade de informações sensíveis</li>
+                    </ul>
                 </div>
-            </div>
-        </section>
+            </section>
+
+            <!-- Footer -->
+            <section class="footer-section">
+                <div class="footer-title">Proposta válida por 30 dias</div>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-label">E-mail</div>
+                        <div class="contact-value">joseferreira9776@gmail.com</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-label">Telefone / WhatsApp</div>
+                        <div class="contact-value">(11) 98340-5944</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-label">CNPJ</div>
+                        <div class="contact-value">61.066.694/0001-54</div>
+                    </div>
+                </div>
+            </section>
+        </div>
     </div>
 
     <script>
-        // Função para alternar a visibilidade da sidebar em dispositivos móveis
+        // Toggle sidebar para mobile
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             sidebar.classList.toggle('active');
         }
 
-        // Garante que o script só execute após o carregamento completo do DOM
-        document.addEventListener('DOMContentLoaded', function() {
-            // Seleciona todos os links de navegação da sidebar
-            const navLinks = document.querySelectorAll('.nav-link');
-            // Seleciona todas as seções do conteúdo principal que possuem um ID (incluindo divs com class section)
-            const sections = document.querySelectorAll('[id]');
+        // Função para alternar entre propostas
+        function switchProposal(proposalNumber) {
+            // Remove active de todos os botões
+            document.querySelectorAll('.toggle-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
             
-            // Função principal para atualizar o link ativo no menu lateral
-            function updateActiveLink() {
-                const scrollY = window.scrollY + 200; // Posição atual da rolagem vertical + offset
-                let currentSectionId = 'hero'; // Valor padrão é hero (início)
-                
-                // Lista das seções válidas na ordem correta
-                const validSectionIds = ['hero', 'secao1', 'secao2', 'secao3', 'secao4', 'secao5'];
-                
-                // Verifica se estamos muito no início da página
-                if (window.scrollY < 50) {
-                    currentSectionId = 'hero';
-                } else {
-                    // Encontra a seção mais próxima baseada na posição do scroll
-                    let closestSection = null;
-                    let closestDistance = Infinity;
-                    
-                    validSectionIds.forEach(sectionId => {
-                        const section = document.getElementById(sectionId);
-                        if (section) {
-                            const sectionTop = section.offsetTop;
-                            const distance = Math.abs(scrollY - sectionTop);
-                            
-                            // Se esta seção está acima ou na posição atual e é a mais próxima
-                            if (sectionTop <= scrollY && distance < closestDistance) {
-                                closestDistance = distance;
-                                closestSection = sectionId;
-                            }
-                        }
-                    });
-                    
-                    if (closestSection) {
-                        currentSectionId = closestSection;
-                    }
-                }
+            // Adiciona active no botão clicado
+            document.getElementById(`btn-proposal-${proposalNumber}`).classList.add('active');
+            
+            // Oculta todas as propostas
+            document.querySelectorAll('.proposal-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Mostra a proposta selecionada
+            document.getElementById(`proposal-${proposalNumber}`).classList.add('active');
+            
+            // Atualiza número da proposta
+            const proposalNumberElement = document.getElementById('proposal-number');
+            if (proposalNumber === 1) {
+                proposalNumberElement.textContent = '0001/2025';
+            } else {
+                proposalNumberElement.textContent = '0002/2025';
+            }
+            
+            // Rola para o topo
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Atualiza navegação ativa
+            updateActiveLink();
+        }
 
-                // Verifica se estamos no final da página
-                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 200) {
-                    currentSectionId = 'secao5'; // Última seção
+        // Navegação suave e ativação de links
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section[id], .section[id]');
+            
+            // Função para atualizar link ativo
+            function updateActiveLink() {
+                const scrollPos = window.scrollY + 150;
+                
+                let currentSection = '';
+                
+                // Verifica todas as seções visíveis
+                const activeProposal = document.querySelector('.proposal-content.active');
+                const activeSections = activeProposal.querySelectorAll('section[id], .section[id]');
+                
+                activeSections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    const sectionId = section.getAttribute('id');
+                    
+                    if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                        currentSection = sectionId;
+                    }
+                });
+                
+                if (!currentSection) {
+                    currentSection = 'hero';
                 }
                 
-                // Remove a classe 'active' de todos os links de navegação
+                // Remove active class de todos os links
                 navLinks.forEach(link => {
                     link.classList.remove('active');
                 });
                 
-                // Adiciona a classe 'active' ao link que corresponde à seção atual
-                if (currentSectionId) {
-                    // Encontra o link usando o atributo 'data-section' que corresponde ao ID da seção
-                    const activeLink = document.querySelector(`[data-section="${currentSectionId}"]`);
-                    if (activeLink) {
-                        activeLink.classList.add('active');
-                    }
+                // Adiciona active class ao link correspondente
+                const activeLink = document.querySelector(`[data-section="${currentSection}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
                 }
             }
             
-            // Variable para controlar se estamos navegando por clique
-            let isNavigating = false;
-
-            // Adiciona um listener de clique para cada link de navegação
+            // Navegação por clique
             navLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
-                    e.preventDefault(); // Impede o comportamento padrão do link (salto instantâneo)
+                    e.preventDefault();
                     
-                    // Define que estamos navegando por clique
-                    isNavigating = true;
-                    
-                    // Remove a classe active de todos os links primeiro
-                    navLinks.forEach(navLink => {
-                        navLink.classList.remove('active');
-                    });
-                    
-                    // Adiciona a classe active ao link clicado
+                    // Remove active de todos
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    // Adiciona active no clicado
                     this.classList.add('active');
                     
-                    // Obtém o ID da seção alvo a partir do atributo 'href' do link
+                    // Scroll suave para a seção
                     const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId); // Seleciona o elemento alvo
+                    const activeProposal = document.querySelector('.proposal-content.active');
+                    const targetElement = activeProposal.querySelector(targetId);
                     
                     if (targetElement) {
-                        // Rola suavemente até a seção alvo
                         targetElement.scrollIntoView({
-                            behavior: 'smooth', // Ativa a rolagem suave
-                            block: 'start' // Alinha o topo da seção com o topo da viewport
+                            behavior: 'smooth',
+                            block: 'start'
                         });
-
-                        // Depois de um tempo, permite que o scroll listener funcione novamente
-                        setTimeout(() => {
-                            isNavigating = false;
-                        }, 1000);
                     }
                     
-                    // Fecha a sidebar automaticamente no mobile após o clique
+                    // Fecha sidebar no mobile
                     if (window.innerWidth <= 768) {
                         document.getElementById('sidebar').classList.remove('active');
                     }
                 });
             });
 
-            // Adiciona um listener de rolagem à janela para atualizar o link ativo
-            let scrollTimeout; // Variável para controlar o "debounce"
+            // Atualiza link ativo no scroll
+            let scrollTimeout;
             window.addEventListener('scroll', function() {
-                // Se estamos navegando por clique, não executa a atualização automática
-                if (isNavigating) return;
-                
-                // Limpa qualquer timeout anterior para evitar chamadas excessivas da função
-                // Isso melhora a performance, pois a função só é chamada após um breve período de inatividade na rolagem
                 clearTimeout(scrollTimeout);
-                scrollTimeout = setTimeout(updateActiveLink, 10); // Chama updateActiveLink após 10ms de inatividade (mais responsivo)
+                scrollTimeout = setTimeout(updateActiveLink, 100);
             });
             
-            // Chama a função uma vez no carregamento da página para definir o link ativo inicial
+            // Define o primeiro link como ativo no carregamento
+            if (navLinks.length > 0) {
+                navLinks[0].classList.add('active');
+            }
+            
+            // Chama uma vez no carregamento
             updateActiveLink();
         });
+
+        // Torna updateActiveLink global para uso em switchProposal
+        window.updateActiveLink = function() {
+            const scrollPos = window.scrollY + 150;
+            
+            let currentSection = '';
+            
+            const activeProposal = document.querySelector('.proposal-content.active');
+            const activeSections = activeProposal.querySelectorAll('section[id], .section[id]');
+            
+            activeSections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                    currentSection = sectionId;
+                }
+            });
+            
+            if (!currentSection) {
+                currentSection = 'hero';
+            }
+            
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            const activeLink = document.querySelector(`[data-section="${currentSection}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+        };
     </script>
 </body>
 </html>
+
